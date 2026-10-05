@@ -1,0 +1,61 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Technova_Login_App
+{
+    public partial class Frm_Login : Form
+    {
+        public Frm_Login()
+        {
+            InitializeComponent();
+        }
+
+        private void lbl_Note_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_Submit_Click(object sender, EventArgs e)
+        {
+            if ((tb_Username.Text == "a" && tb_Password.Text == "a") || (tb_Username.Text == "Admin" && tb_Password.Text == "A123"))
+            {
+                MessageBox.Show("Login Successful!!!", "SUCCESS");
+
+                Frm_Add_New_Employees Obj1 = new Frm_Add_New_Employees();
+                Obj1.Show();
+                this.Hide();
+            }
+            else
+            {
+                lbl_Note.Text = "Enter valid username && password.";
+                lbl_Note.ForeColor = Color.Red;
+            }
+
+            tb_Username.Clear();
+            tb_Password.Clear();
+        }
+
+        private void tb_Username_TextChanged(object sender, EventArgs e)
+        {
+            tb_Password.Enabled = true;
+            lbl_Note.Visible = true;
+        }
+
+        private void tb_Password_TextChanged(object sender, EventArgs e)
+        {
+            btn_Submit.Enabled = true;
+        }
+
+        private void Frm_Login_Load(object sender, EventArgs e)
+        {
+            lbl_Note.Visible = true;
+        }
+    }
+}

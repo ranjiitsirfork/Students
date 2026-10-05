@@ -1,0 +1,227 @@
+--Database Create--
+Create Database Library_Management_System_DB;
+
+--Table Create (DDL)--
+Create Table Member_Details (MemberID INT Not Null, Name varchar(40) Not Null, MobNo Numeric(10,0) Not Null, Address nvarchar(50));
+
+Create Table Books_Details (BookID INT Not Null, Title varchar(60) Not Null, Author varchar(40) Not Null, Category varchar(50), Price Money Not Null, Quantity INT Not Null);
+
+Create Table Issue_Details (IssueID INT Not Null, MemberID INT Not Null, BookID INT Not Null, IssueDate Date Not Null, DueDate Date Not Null);
+
+--(DQL) Query Select--
+Select * From Member_Details;
+
+Select * From Books_Details;
+
+Select * From Issue_Details;
+
+Select Title From Books_Details;
+
+Select Category From Books_Details;
+
+Select Title, Category, Price, Quantity From Books_Details;
+
+--(DML) Insert Query in Issue_Details Table--
+Insert Into Issue_Details Values(301, 101, 201, '05/15/2026', '01/26/2026');
+Insert Into Issue_Details Values(302, 102, 202, '2025/11/04', '2025/12/13');
+Insert Into Issue_Details Values(303, 103, 203, '15-Jan-2025', '26-June-2025');
+Insert Into Issue_Details Values(304, 104, 204, '7-May-2026', '23-June-2025');
+Insert Into Issue_Details Values(305, 105, 205, '23-Apr-2025', '17-July-2025');
+
+Select * From Issue_Details;
+
+--Insert Query in Member_Details Table--
+Insert Into Member_Details(MemberID, Name, MobNo, Address) Values(101, 'Rahul Patil', 7896566323, 'Pune');
+Insert Into Member_Details(MemberID, Name, MobNo, Address) Values(102, 'Priya Sharma', 4563217896, 'Mumbai');
+Insert Into Member_Details(MemberID, Name, MobNo, Address) Values(103, 'Amit Joshi', 9845632178, 'Nashik');
+Insert Into Member_Details(MemberID, Name, MobNo, Address) Values(104, 'Sneha Kulkarni', 8965472394, 'Mumbai');
+Insert Into Member_Details(Name, MemberID, MobNo, Address) Values('Priya Sharma', 105, 4563217896, 'Satara');
+
+Select * From Member_Details;
+
+--Insert Query in Books_Details Table--
+Insert Into Books_Details(BookID, Title, Author, Category, Price, Quantity) Values(201, 'C Programming', 'Dennis Ritchie', 'Programming', 450, 10);
+Insert Into Books_Details(BookID, Price, Author, Category, Title, Quantity) Values(202, '650', 'Abraham Silberschatz', 'Database', 'DBMS Concepts', 7);
+
+Insert Into Books_Details Values(203, 'Data Structures', 'Seymour Lipschutz', ' ', 550, 6);
+Insert Into Books_Details Values(204, 'HTML & CSS', 'Jon Duckett', 'Web Development', 500, 8);
+Insert Into Books_Details Values(205, 'Java Programming', 'Herbert Schildt', 'Programming', 700, 5);
+
+Insert Into Books_Details Values(206, 'Python Basics', 'Eric Matthes', 'Programming', 600, 7);
+Insert Into Books_Details Values(207, 'Computer Networks', 'Andrew S. Tanenbaum', 'Networking', 750, 4);
+Insert Into Books_Details Values(208, 'Operating System', 'Galvin', 'Operating System', 680, 6);
+Insert Into Books_Details Values(209, 'C++ Programming', 'Bjarne Stroustrup', ' ', 800, 3);
+Insert Into Books_Details Values(210, 'Software Engineering', 'McGraw Hill', 'Software Engineering', 720, 5);
+
+Select * From Books_Details;
+
+--Where Clause--
+Select * From Books_Details;
+
+Select * From Books_Details where Price > 700;
+
+Select * From Books_Details where Price < 700;
+
+Select * From Books_Details where Price != 500;
+
+Select * From Books_Details Where Price = 500;
+
+Select * From Books_Details where Price = 600 OR Price = 800;
+
+--Between Clause--
+Select * From Books_Details;
+
+Select * From Books_Details where Price Between 500 AND 1000;					--Inclusive--
+
+Select * From Books_Details where Price Between 501 AND 999;
+
+Select * From Books_Details where Price > 500 AND Price < 1000;					--Exclusive--
+
+Select * From Books_Details where Price >= 500 AND Price <=800;
+
+--Aggregative Functions--
+Select Max(Price) From Books_Details;
+
+Select * From Books_Details where Price = (Select Max(Price) From Books_Details);
+
+Select Max(Title) From Books_Details;
+
+Select Avg(Price) From Books_Details;
+
+Select Sum(Price) From Books_Details;
+
+Select Count(*) From Books_Details;
+
+Select Count(Author) From Books_Details;
+
+Select Count(Title) From Books_Details;
+
+--Order By--
+--Ascending Order(Default)--
+Select * From Books_Details;
+
+Select * From Books_Details Order By BookID ASC;
+Select * From Books_Details Order By Quantity ASC;
+
+--Descending Order--
+Select * From Books_Details Order By BookID DESC;
+Select * From Books_Details Order By Quantity DESC;
+
+--Like Pattern Maching--
+--For Name--
+Select * From Books_Details;
+
+Select * From Books_Details where Author = 'Dennis Ritchie'; 
+
+Select * From Books_Details where Author Like 'A%';
+
+Select * From Books_Details where Author like '%z';
+
+Select * From Books_Details where Author like 'Ga%';
+
+Select * From Books_Details where Author like '%tz';
+
+Select * From Books_Details where Author like '%be%';
+
+Select * From Books_Details where Author like '_e%';
+
+Select * From Books_Details where Author like '%t_';
+
+Select * From Books_Details where Author like '%ru_';
+
+--For Price--
+Select * From Books_Details where Price like '7%';
+
+Select * From Books_Details where Price like '%7';
+
+Select * From Books_Details where Price like '%8%';
+
+Select * From Books_Details where Price like '%00';
+
+Select * From Books_Details where Price like '_5%';
+
+Select * From Books_Details where Price like '%0_';
+
+Select * From Books_Details where Price like '%50_';
+
+--(DDL) Alter Query--
+Alter Table Books_Details Add BookWeight float null;
+
+Alter Table Books_Details Drop Column BookWeight;
+
+Alter Table Books_Details Alter Column Title varchar(50);
+
+--Update Query--
+
+Select * From Books_Details;
+
+Update Books_Details Set Title = 'JavaScript Programming' where BookID = 210;
+
+Update Books_Details Set Price = 750 where Category = 'Programming';
+
+Update Books_Details Set Price += 150;			--All Prices increase by 150--
+
+Update Books_Details Set Price -= 150;			--All Prices decrease by 150--
+
+Update Books_Details Set Price += 150 where Category = 'Networking';
+
+Update Books_Details Set Quantity = 4;
+
+Update Books_Details Set Quantity = 5 where BookID = 201;
+
+Update Books_Details Set Quantity = 3 where BookID = 202;
+
+Update Books_Details Set Quantity = 2 where BookID = 203;
+
+Update Books_Details Set Quantity = 6 where BookID = 205;
+
+Update Books_Details Set Quantity = 8 where BookID = 207;
+
+Update Books_Details Set Quantity = 15 where BookID = 208;
+
+Update Books_Details Set Quantity = 10 where BookID = 209;
+
+Update Books_Details Set Title = 'C# Programming', Category = 'Programming', Price = 750 where BookID = 207;
+
+Update Books_Details Set Category = 'Web Development' where Category = 'Software Engineering';
+
+Update Books_Details Set BookID = 301 where BookID = 210;
+
+--Delete Query--
+Delete From Books_Details Where BookID = 207;
+
+Delete From Books_Details Where Author = 'Eric Matthes';
+
+Delete From Books_Details Where Price > 600;
+
+Delete From Books_Details;		--Delete All Data--
+
+--Truncate Query--
+Truncate Table Books_Details;		--Remove All Data--
+
+--Drop Query--
+Drop Table Books_Details;			--Delete Table--
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
