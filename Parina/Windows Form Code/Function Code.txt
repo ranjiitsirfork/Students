@@ -1,0 +1,28 @@
+SqlConnection FCon = new SqlConnection(@"Data Source=DESKTOP-1KHL7UJ;Initial Catalog=Technova_Employee_DB;Integrated Security=True");
+        
+	void FCon_Start()
+        {
+            if (FCon.State != ConnectionState.Open)
+            {
+                FCon.Open();
+            }
+        }
+
+        void FCon_Stop()
+        {
+            if (FCon.State != ConnectionState.Closed)
+            {
+                FCon.Close();
+            }
+        }
+
+        void Clear_Controls()
+        {
+            tb_Emp_ID.Clear();
+            tb_Name.Clear();
+            dtp_DOB.Text = "01-01-2010";
+            tb_Mob_No.Clear();
+            cmb_Qul.SelectedIndex = -1;
+            dtp_JD.Text = "01-05-2026";
+
+        }

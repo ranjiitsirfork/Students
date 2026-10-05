@@ -1,0 +1,29 @@
+private void btn_Search_Click(object sender, EventArgs e)
+        {
+            if(tb_Emp_ID.Text != "")
+            {
+                FCon_Start();
+
+                SqlCommand Cmd = new SqlCommand();
+
+                Cmd.CommandText = "Select * From Employee_Enquiry_Details Where Emp_ID = @EID";
+                Cmd.Connection = FCon;
+
+                Cmd.Parameters.Add("@EID", SqlDbType.Int).Value = tb_Emp_ID.Text;
+
+                SqlDataReader DR = Cmd.ExecuteReader();
+
+                if(DR.Read())
+                {
+                    tb_Name.Text = DR.GetString(DR.GetOrdinal("Name"));
+                    dtp_DOB.Text = (DR["DOB"].ToString());
+                    tb_Mob_No.Text = (DR["Mob_No"].ToString());
+                    cmb_Qul.Text = DR.GetString(DR.GetOrdinal("Qul"));
+                    dtp_JD.Text = (DR["JD"].ToString());
+                }
+                else
+                {
+                    MessageBox.Show("Invalid Employee ID !!", "No Searched Employee Found");
+                    tb_Emp_ID.Clear();
+                }
+            }

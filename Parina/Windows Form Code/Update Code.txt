@@ -1,0 +1,30 @@
+private void btn_Update_Click(object sender, EventArgs e)
+        {
+            FCon_Start();
+
+            if (tb_Emp_ID.Text != "" && tb_Name.Text != "" && tb_Mob_No.Text != "" && cmb_Qul.Text != "")
+            {
+                SqlCommand Cmd = new SqlCommand();
+
+                Cmd.CommandText = "Update Employee_Enquiry_Details Set Name = @Nm, DOB = @DOB, Mob_No = @MNo, Qul = @Qlf, JD = @JDt where Emp_ID = @EID";
+                Cmd.Connection = FCon;
+
+                ///Parameters
+                Cmd.Parameters.Add("EID", SqlDbType.Int).Value = tb_Emp_ID.Text;
+                Cmd.Parameters.Add("Nm", SqlDbType.VarChar).Value = tb_Name.Text;
+                Cmd.Parameters.Add("DOB", SqlDbType.Date).Value = dtp_DOB.Text;
+                Cmd.Parameters.Add("MNo", SqlDbType.Decimal).Value = tb_Mob_No.Text;
+                Cmd.Parameters.Add("Qlf", SqlDbType.NVarChar).Value = cmb_Qul.Text;
+                Cmd.Parameters.Add("JDt", SqlDbType.Date).Value = dtp_JD.Text;
+
+                Cmd.ExecuteNonQuery();
+
+                MessageBox.Show("Employee Details Updated Successfully !!!", "UPDATE");
+            }
+            else
+            {
+                MessageBox.Show("Employee Details Not Updated !!!", "NOT UPDATE");
+            }
+
+            FCon_Stop();
+        }

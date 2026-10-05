@@ -1,0 +1,19 @@
+void FBindGrid()
+        {
+            FCon_Start();
+
+            SqlDataAdapter SDA = new SqlDataAdapter("Select * From Employee_Enquiry_Details", FCon);
+            //SqlDataAdapter SDA = new SqlDataAdapter("Select Name, DOB, Qul, Mob_No, JD From Employee_Enquiry_Details", FCon);
+
+            DataTable dt = new DataTable();
+
+            SDA.Fill(dt);
+
+            dgv_Emp_List.DataSource = dt;
+
+            FCon_Stop();
+        }
+        private void Frm_Employee_List_Load(object sender, EventArgs e)
+        {
+            FBindGrid();
+        }

@@ -1,0 +1,32 @@
+private void btn_Save_Click(object sender, EventArgs e)
+        {
+            FCon_Start();
+
+            if (tb_Emp_ID.Text != "" && tb_Name.Text != "" && tb_Mob_No.Text != "" && cmb_Qul.Text != "")
+            {
+                SqlCommand Cmd = new SqlCommand();
+
+                Cmd.CommandText = "Insert Into Employee_Enquiry_Details(Emp_ID, Name, DOB, Mob_No, Qul, JD) Values (@EID, @Nm, @DOB, @MNo, @Qlf, @JDt)";
+                Cmd.Connection = FCon;
+
+                ///Parameters
+                Cmd.Parameters.Add("EID", SqlDbType.Int).Value = tb_Emp_ID.Text;
+                Cmd.Parameters.Add("Nm", SqlDbType.VarChar).Value = tb_Name.Text;
+                Cmd.Parameters.Add("DOB", SqlDbType.Date).Value = dtp_DOB.Text;
+                Cmd.Parameters.Add("MNo", SqlDbType.Decimal).Value = tb_Mob_No.Text;
+                Cmd.Parameters.Add("Qlf", SqlDbType.NVarChar).Value = cmb_Qul.Text;
+                Cmd.Parameters.Add("JDt", SqlDbType.Date).Value = dtp_JD.Text;
+
+                Cmd.ExecuteNonQuery();
+
+                MessageBox.Show("Employee Details Saved Successfully !!!", "SAVE");
+
+                Clear_Controls();
+            }
+            else
+            {
+                MessageBox.Show("Incomplete Information !!!", "NOT SAVED");
+            }
+
+            FCon_Stop();
+        }
